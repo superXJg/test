@@ -7,7 +7,7 @@
             <div class="list-content">
               {{item.title}}
             </div>
-            <div class="del">删除</div>
+            <div class="del" @click.stop.prevent="delOne(index)">删除</div>
           </div>
         </li>
       </ul>
@@ -65,6 +65,7 @@
         },
         end(e) {
           console.log("end")
+          this.resetTranstion()
           let move = e.changedTouches[0].clientX - this.Pstart.x
           if ( move > 40 ) {
             e.target.parentNode.parentNode.dataset.type = 0
@@ -74,8 +75,18 @@
             e.target.parentNode.parentNode.dataset.type = 1
           }
         },
-        setTransition() {
-
+        setTransition() {},
+        resetTranstion() {
+            let list = document.getElementsByClassName('list-item')
+            // console.log(Object.prototype.toString.call(list))
+            for (let i = 0; i < list.length; i++) {
+                list[i].dataset.type = 0
+            }
+        },
+        delOne(index) {
+            console.log(index)
+            this.list.splice(index,1)
+            this.resetTranstion()
         }
       }
     }
@@ -117,4 +128,5 @@
         line-height 60px
         background-color: orangered
         color #FFF
+        z-index 2
 </style>
