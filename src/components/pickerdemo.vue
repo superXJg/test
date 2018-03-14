@@ -3,15 +3,18 @@
         <p>城市选择器</p>
         <button @click="_show(0)">显示按钮1</button>
         <button @click="_show(1)">显示按钮2</button>
-        <picker ref="picker0" :data="list[1]" :selected-index="selectedIndex[1]" title="test"></picker>
-        <picker ref="picker1" :data="list[2]" :selected-index="selectedIndex[2]" title="test"></picker>
-        <city-picker ref="picker2" :data="list[3]" :selected-index="selectedIndex[3]"></city-picker>
+        <button @click="_show(2)">显示按钮3</button>
+        <picker  ref="picker0" :data="list[1]" :selected-index="selectedIndex[1]" title="test"></picker>
+        <picker @select="handleSelect" ref="picker1" :data="list[2]" :selected-index="selectedIndex[2]" title="test"></picker>
+        <city-picker @select="handleSelect(3,arguments)" ref="picker2" :data="list[3]" title="请选择区域" :selected-index="selectedIndex[3]" cancelTxt="取消" confirmTxt="确定"></city-picker>
+        <div>{{selectedText}}</div>
+        <div>{{code}}</div>
     </div>
 </template>
 
 <script>
     import picker from 'components/picker'
-    import CityPicker from 'components/cityPicker'
+    import cityPicker from 'components/city-picker'
     import {provinceList, cityList, areaList} from 'common/js/data.js'
     let data1 = [
         {
@@ -133,7 +136,7 @@
         }
     ]
     export default {
-        name: "city-picker",
+        name: "pickerdemo",
         data () {
             return{
                 list:[
@@ -147,7 +150,9 @@
                     [1, 0],
                     [0, 1, 2],
                     [0, 0, 0]
-                ]
+                ],
+                selectedText: [],
+                code: []
             }
         },
         mounted() {
@@ -156,15 +161,23 @@
         },
         components : {
             picker,
-            CityPicker
+            cityPicker
         },
         methods : {
             _show(index) {
                 this.$refs['picker'+index].show()
-                console.log(index)
+                // console.log(index)
             },
             _hide(index) {
                 this.$refs.picker.hide()
+            },
+            selectedInfo(a) {
+                console.log(a)
+            },
+            handleSelect(index, args) {
+                console.log(index, args)
+                this.selectedText.splice(index, 1, args[2].join('，'))
+                this.code = args[3]
             }
         }
     }
