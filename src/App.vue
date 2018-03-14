@@ -3,25 +3,24 @@
     <hello>
       <div slot="menu">
         我是侧边栏啦
-        
       </div>
       <div class="content">
         <slideDel></slideDel>
       </div>
     </hello>
+    <router-link class="btn" to="/picker">点击</router-link>
     <router-view/>
   </div>
 </template>
 
 <script>
   import hello from './components/HelloWorld.vue'
-  import slideDelete from './components/slideDelete.vue'
   import slideDel from './components/slideDel.vue'
+  import picker from './components/picker'
   export default {
    name: 'App',
     components:{
       hello,
-      slideDelete,
       slideDel
     }
   }
@@ -171,6 +170,13 @@
     bottom: 0;
     left: 0;
     right: 0;
+    .btn
+      position absolute
+      left: 0
+      top: 50%
+      width: 200px
+      height: 100px
+      background-color: red
     .menu
       background-color: orangered
     .content
