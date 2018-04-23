@@ -3,7 +3,7 @@
 > A Vue.js project
 
     从网上参考下来的纯js组件<br>
-    `等有时间了再整理，现在非常乱`
+    等有时间了再整理，现在非常乱
 
 ## Build Setup
 
