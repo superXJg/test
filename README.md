@@ -2,6 +2,8 @@
 
 > A Vue.js project
 
+    从网上参考下来的纯js组件
+
 ## Build Setup
 
 ``` bash
